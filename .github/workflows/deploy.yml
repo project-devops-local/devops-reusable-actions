@@ -1,0 +1,28 @@
+name: Reusable Deploy
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+      url: ${{ inputs.environment == 'production' && 'https://miapp.com' || (inputs.environment == 'release' && 'https://staging.miapp.com' || 'https://dev.miapp.com') }}
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configuración inicial
+        run: echo "Preparando despliegue en ${{ inputs.environment }}"
+
+      - name: Conectar con base de datos
+        run: echo "Conectando con DB en ${{ vars.DB_HOST }}"
+
+      - name: Desplegar aplicación
+        run: echo "Aplicación desplegada en ${{ inputs.environment }}"
