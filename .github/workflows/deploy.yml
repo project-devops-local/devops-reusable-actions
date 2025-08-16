@@ -20,7 +20,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configuración inicial
-        run: echo "Preparando despliegue en ${{ inputs.environment }}"
+        run: |
+          echo "Preparando despliegue en ${{ inputs.environment }}"
+         
+      - name: Configurar variables de entorno
+        if: ${{ inputs.environment == 'develop' }}
+        run: exit
 
       - name: Conectar con base de datos
         run: echo "Conectando con DB en ${{ vars.DB_HOST }}"
