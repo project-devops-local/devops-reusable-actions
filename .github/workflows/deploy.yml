@@ -6,6 +6,9 @@ on:
       environment:
         required: true
         type: string
+permissions:
+  actions: read
+  contents: read
 
 jobs:
   deploy:
