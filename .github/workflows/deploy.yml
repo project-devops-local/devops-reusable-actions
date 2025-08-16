@@ -25,7 +25,7 @@ jobs:
          
       - name: Configurar variables de entorno
         if: ${{ inputs.environment == 'develop' }}
-        run: exit
+        run: exit 1
 
       - name: Conectar con base de datos
         run: echo "Conectando con DB en ${{ vars.DB_HOST }}"
